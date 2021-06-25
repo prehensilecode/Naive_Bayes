@@ -26,6 +26,7 @@
 *.exe
 *.out
 *.app
+NB.run
 
 # =========================
 # Operating System Files
