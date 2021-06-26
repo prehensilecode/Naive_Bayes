@@ -1,7 +1,8 @@
-CXX=g++ -std=c++11 -pthread -Wno-deprecated-declarations
+CXX=g++
 OPT=-O3
+CXXFLAGS=-std=c++11 -pthread -Wno-deprecated-declarations $(OPT)
 CPPFLAGS=-I$(BOOSTINCLUDEDIR)
-LDFLAGS=-L$(BOOSTLIBDIR) -lboost_filesystem -lboost_system -lboost_program_options
+LDFLAGS=-L$(BOOSTLIBDIR) -lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
 DBG=-g
 
 OBJS=Genome.o NB.o Diskutil.o main.o
