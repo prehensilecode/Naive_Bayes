@@ -79,11 +79,32 @@ Please post an issue on our repo.
 ...are welcome!
 
 ## Building on a local machine
-First, install the dependencies. On Ubuntu, it suffices to run:
+### Linux
+First, install the dependencies. 
+
+On Ubuntu, it suffices to run:
 ```
 sudo apt install make g++ libboost-all-dev
 ```
 
+On Red Hat and similar distros (Fedora, CentOS, Rocky Linux):
+```
+sudo yum install make gcc-c++ boost boost-devel boost-filesystem boost-system boost-program-options
+```
+
+N.B. Homebrew can also be used to install the above packages if you require versions
+other than what is provided by the distro.
+
+### macOS
+Use [Homebrew](https://brew.sh) to install Boost:
+```
+brew install boost
+```
+
+Depending on where you decide to install Homebrew (the default is under `/usr/local`),
+you may need to set the `BOOSTINCLUDEDIR` and `BOOSTLIBDIR` macros in the `Makefile`.
+
+### Build
 Then, to build on your local machine, simply run:
 ```
 make
