@@ -1,21 +1,21 @@
 ### XXX select your compiler
 ### GNU - Linux and macOS
-#CXX=g++ -std=c++11
-#OPT=-O3
-#CXXFLAGS=-pthread -Wno-deprecated-declarations $(OPT)
+CXX=g++ -std=c++11
+OPT=-O3
+CXXFLAGS=-pthread -Wno-deprecated-declarations $(OPT)
 
 ### Intel icpc - Linux
-CXX=icpc -std=c++11
-OPT=-O3 -xHost
-CXXFLAGS=-pthread $(OPT)
+#CXX=icpc -std=c++11
+#OPT=-O3 -xHost
+#CXXFLAGS=-pthread $(OPT)
 
 ### If you have Boost installed by your system's package manager (apt, yum, dnf, homebrew)
-#CPPFLAGS=
-#LDFLAGS=-lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
+CPPFLAGS=
+LDFLAGS=-lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
 
 ### otherwise, manually set the values BOOSTINCLUDEDIR and BOOSTLIBDIR if you have a custom location
-CPPFLAGS=-I$(BOOSTINCLUDEDIR)
-LDFLAGS=-L$(BOOSTLIBDIR) -Wl,-rpath,$(BOOSTLIBDIR) -lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
+#CPPFLAGS=-I$(BOOSTINCLUDEDIR)
+#LDFLAGS=-L$(BOOSTLIBDIR) -Wl,-rpath,$(BOOSTLIBDIR) -lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
 
 DBG=-g -O0
 
