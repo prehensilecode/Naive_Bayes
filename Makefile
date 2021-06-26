@@ -4,8 +4,7 @@ CPPFLAGS=-I$(BOOSTINCLUDEDIR)
 LDFLAGS=-L$(BOOSTLIBDIR) -lboost_filesystem -lboost_system -lboost_program_options
 DBG=-g
 
-SRCS=Class.cpp Class.hpp NB.cpp NB.hpp main.cpp Genome.hpp Genome.cpp Diskutil.hpp Diskutil.cpp
-CXXSRCS=Genome.cpp NB.cpp Diskutil.cpp main.cpp
+OBJS=Genome.o NB.o Diskutil.o main.o
 
 .PHONY: default all clean debug
 
@@ -13,13 +12,13 @@ default: all
 
 all: NB.run
 
-proteus: $(CXXSRCS)
+proteus: $(OBJS)
 	$(CXX) $(OPT) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
 
-debug: $(CXXSRCS)
+debug: $(OBJS)
 	$(CXX) $(OPT) $(DBG) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
 
-NB.run: $(CXXSRCS)
+NB.run: $(OBJS)
 	$(CXX) $(OPT) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
 
 clean:
