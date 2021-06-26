@@ -15,7 +15,7 @@ CXXFLAGS=-pthread $(OPT)
 
 ### otherwise, manually set the values BOOSTINCLUDEDIR and BOOSTLIBDIR if you have a custom location
 CPPFLAGS=-I$(BOOSTINCLUDEDIR)
-LDFLAGS=-L$(BOOSTLIBDIR) -lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
+LDFLAGS=-L$(BOOSTLIBDIR) -Wl,-rpath,$(BOOSTLIBDIR) -lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
 
 DBG=-g
 
