@@ -22,4 +22,4 @@ NB.run: $(OBJS)
 	$(CXX) $(OPT) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
 
 clean:
-	@rm -f NB.run
+	@rm -f NB.run *.o
