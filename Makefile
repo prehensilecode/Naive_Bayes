@@ -6,10 +6,10 @@ CXX=g++ -std=c++11
 #OPT=-O3 -march=native
 
 # XXX DEBUG
-# OPT=-g
-#
-# XXX QUESTION should a profiling build be optimized?
+# OPT=-g -O0
+
 # XXX PROFILE
+# XXX QUESTION should a profiling build be optimized?
 OPT=-g -O3 -pg
 CXXFLAGS=-pthread -Wno-deprecated-declarations $(OPT)
 
@@ -41,9 +41,6 @@ proteus: $(OBJS)
 # NOTE no optimization on debug build
 debug: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
-
-profile: $(OBJS)
-	$(CXX) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
 
 $(PROG): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
