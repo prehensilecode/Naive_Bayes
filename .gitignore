@@ -28,6 +28,9 @@
 *.app
 NB.run
 
+# profiling data
+gmon.out
+
 # =========================
 # Operating System Files
 # =========================

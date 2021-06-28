@@ -1,13 +1,19 @@
 ### XXX select your compiler
 ### GNU
-#CXX=g++ -std=c++11
-#OPT=-O3
-#CXXFLAGS=-pthread -Wno-deprecated-declarations $(OPT)
+CXX=g++ -std=c++11
+
+OPT=-O3 -march=native
+# XXX DEBUG
+# OPT=-g
+# XXX QUESTION should a profiling build be optimized?
+# XXX PROFILE
+OPT=-g -O3 -pg
+CXXFLAGS=-pthread -Wno-deprecated-declarations $(OPT)
 
 ### Intel icpc
-CXX=icpc -std=c++11
-OPT=-O3 -xHost
-CXXFLAGS=-pthread $(OPT)
+#CXX=icpc -std=c++11
+#OPT=-O3 -xHost
+#CXXFLAGS=-pthread $(OPT)
 
 ### If you have Boost installed by your system's package manager (apt, yum ,dnf)
 #CPPFLAGS=
@@ -17,24 +23,26 @@ CXXFLAGS=-pthread $(OPT)
 CPPFLAGS=-I$(BOOSTINCLUDEDIR)
 LDFLAGS=-L$(BOOSTLIBDIR) -Wl,-rpath,$(BOOSTLIBDIR) -lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
 
-DBG=-g
-
+PROG=NB.run
 OBJS=Genome.o NB.o Diskutil.o main.o
 
 .PHONY: default all clean debug
 
 default: all
 
-all: NB.run
+all: $(PROG)
 
 proteus: $(OBJS)
-	$(CXX) $(OPT) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
 
 debug: $(OBJS)
-	$(CXX) $(OPT) $(DBG) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
 
-NB.run: $(OBJS)
-	$(CXX) $(OPT) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
+profile: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(PROFILE) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
+
+$(PROG): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
 
 clean:
 	@rm -f NB.run *.o
