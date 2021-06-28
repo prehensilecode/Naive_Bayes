@@ -1,21 +1,24 @@
 ### XXX select your compiler
-### GNU
+### GNU - Linux and macOS
 CXX=g++ -std=c++11
 
-OPT=-O3 -march=native
+# XXX OPTIMIZED production build
+#OPT=-O3 -march=native
+
 # XXX DEBUG
 # OPT=-g
+#
 # XXX QUESTION should a profiling build be optimized?
 # XXX PROFILE
 OPT=-g -O3 -pg
 CXXFLAGS=-pthread -Wno-deprecated-declarations $(OPT)
 
-### Intel icpc
+### Intel icpc - Linux
 #CXX=icpc -std=c++11
 #OPT=-O3 -xHost
 #CXXFLAGS=-pthread $(OPT)
 
-### If you have Boost installed by your system's package manager (apt, yum ,dnf)
+### If you have Boost installed by your system's package manager (apt, yum, dnf, homebrew)
 #CPPFLAGS=
 #LDFLAGS=-lboost_filesystem -lboost_system -lboost_program_options -pthread -lm
 
@@ -35,11 +38,12 @@ all: $(PROG)
 proteus: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
 
+# NOTE no optimization on debug build
 debug: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
 
 profile: $(OBJS)
-	$(CXX) $(CXXFLAGS) $(PROFILE) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
+	$(CXX) $(CPPFLAGS) $^ -o $(PROG) $(LDFLAGS)
 
 $(PROG): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS)
